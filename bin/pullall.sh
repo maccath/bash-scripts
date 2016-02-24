@@ -13,19 +13,19 @@ source ${parent_path}/../etc/configuration.cfg
 source ${parent_path}/../etc/colours.cfg
 
 # Move to directory containing all projects
-cd ${project_path};
+cd ${project_path}
 
 # For each directory (project)
 for d in */ ; do
-    echo "${green}Switching to ${d}...${reset}";
-    cd "${d}";
+    echo "${green}Switching to ${d}...${reset}"
+    cd "${d}"
 
     # Remember our place
-    original_branch=$(git rev-parse --abbrev-ref HEAD);
-    checked_out=false;
+    original_branch=$(git rev-parse --abbrev-ref HEAD)
+    checked_out=false
 
     # Pull current branch
-    git pull;
+    git pull
 
     # For each specified branch...
     for b in "$@"; do
@@ -34,13 +34,13 @@ for d in */ ; do
             # If the branch exists...
             if [[ $(git branch --list ${b}) ]]; then
                 # Check it out...
-                status=$(git checkout ${b});
-                checked_out=true;
+                status=$(git checkout ${b})
+                checked_out=true
 
                 # And if it's not up to date...
                 if ! [[ "${status}" == *"is up-to-date with"* ]]; then
                     # Pull
-                    git pull;
+                    git pull
                 fi
             fi
         fi
@@ -48,8 +48,8 @@ for d in */ ; do
 
     # Go back to original branch, if we were switched from it
     if [ "${checked_out}" == true ]; then
-        git checkout ${original_branch};
+        git checkout ${original_branch}
     fi
 
-    cd ..;
+    cd ..
 done
