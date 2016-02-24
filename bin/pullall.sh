@@ -3,11 +3,14 @@
 # Example usage:
 # ./pullall.sh [branchName] [branchName] ...
 
+# Parent path
+parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
+
 # Configuration file
-source ./configuration.cfg
+source $parent_path/../etc/configuration.cfg
 
 # Colours
-source ./colours.cfg
+source $parent_path/../etc/colours.cfg
 
 # Move to directory containing all projects
 cd $project_path;

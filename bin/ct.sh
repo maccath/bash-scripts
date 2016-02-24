@@ -3,8 +3,11 @@
 # Example usage
 # . ./ct.sh [projectName]
 
+# Parent path
+parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
+
 # Configuration file
-source ./configuration.cfg
+source $parent_path/../etc/configuration.cfg
 
 project=$(ls -d $project_path$1* | head -n1);
 
