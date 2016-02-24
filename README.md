@@ -9,3 +9,29 @@ To create aliases for the functions, edit your bash profile with something simil
 
     bash_scripts='/path/to/this/project/'
     alias scriptalias="${bash_scripts}bin/script_filename.sh"
+    
+## Available Scripts
+
+### checkoutall.sh
+
+Check out a given branch for all git repositories in `$project_path`
+
+    checkoutall.sh [branchName]
+    
+### pullall.sh
+
+Pull the current branch and all given branches for all git repositories in `$project_path`
+
+    checkoutall.sh [branchName] [branchName] ...
+    
+###  ct.sh
+
+Change directory to the given project in the `$project_path` directory (partial names accepted)
+
+    . ct.sh [projectName]
+    
+### phinx.sh
+
+Create a new Phinx migration in `$db_migrations_path`
+
+    phinx.sh [scriptName] [migrationName]
