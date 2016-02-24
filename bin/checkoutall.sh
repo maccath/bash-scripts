@@ -7,24 +7,24 @@
 parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
 
 # Configuration file
-source $parent_path/../etc/configuration.cfg
+source ${parent_path}/../etc/configuration.cfg
 
 # Colours
-source $parent_path/../etc/colours.cfg
+source ${parent_path}/../etc/colours.cfg
 
 # Move to directory containing all projects
-cd $project_path;
+cd ${project_path};
 
 # For each directory (project)...
 for d in */ ; do
     echo "${green}Switching to ${d}...${reset}";
-    cd "$d";
+    cd "${d}";
 
     # If the branch exists...
-    if [[ $(git branch --list $1) ]]; then
+    if [[ $(git branch --list ${1}) ]]; then
         # Check it out
-        status=$(git checkout $1);
-        echo $status;
+        status=$(git checkout ${1});
+        echo ${status};
 
         # And if it's not up to date...
         if ! [[ "${status}" == *"is up-to-date with"* ]]; then
