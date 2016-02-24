@@ -24,14 +24,19 @@ for d in */ ; do
     # Pull current branch
     git pull;
 
-    # For each specified branch, if it exists, pull
+    # For each specified branch...
     for b in "$@"; do
+        # As long as it's not the original branch...
         if ! [[ "${original_branch}" == "${b}" ]]; then
+            # If the branch exists...
             if [[ $(git branch --list $b) ]]; then
+                # Check it out...
                 status=$(git checkout $b);
                 checked_out=true;
 
+                # And if it's not up to date...
                 if ! [[ "${status}" == *"is up-to-date with"* ]]; then
+                    # Pull
                     git pull;
                 fi
             fi
