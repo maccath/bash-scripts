@@ -6,11 +6,15 @@
 # Configuration file
 source ./configuration.cfg
 
+# Colours
+source ./colours.cfg
+
 # Move to directory containing all projects
 cd $project_path;
 
 # For each directory (project)
 for d in */ ; do
+    echo "${green}Switching to ${d}...${reset}";
     cd "$d";
 
     # Pull current branch
