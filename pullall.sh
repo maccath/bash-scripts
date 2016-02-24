@@ -19,13 +19,15 @@ for d in */ ; do
 
     # Pull current branch
     git pull;
-    original_branch= git rev-parse --abbrev-ref HEAD;
+    original_branch=$(git rev-parse --abbrev-ref HEAD);
 
     # For each specified branch, if it exists, pull
     for b in "$@"; do
-        if [[ $(git branch --list $b) ]]; then
-           git checkout $b;
-           git pull;
+        if ! [[ "${original_branch}" == "${b}" ]]; then
+            if [[ $(git branch --list $b) ]]; then
+               git checkout $b;
+               git pull;
+            fi
         fi
     done
 
