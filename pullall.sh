@@ -25,8 +25,10 @@ for d in */ ; do
     for b in "$@"; do
         if ! [[ "${original_branch}" == "${b}" ]]; then
             if [[ $(git branch --list $b) ]]; then
-               git checkout $b;
-               git pull;
+                status=$(git checkout $b);
+                if ! [[ "${status}" == *"is up-to-date with"* ]]; then
+                    git pull;
+                fi
             fi
         fi
     done
