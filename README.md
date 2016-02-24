@@ -22,7 +22,7 @@ Check out a given branch for all git repositories in `$project_path`
 
 Pull the current branch and all given branches for all git repositories in `$project_path`
 
-    checkoutall.sh [branchName] [branchName] ...
+    pullall.sh [branchName] [branchName] ...
     
 ###  ct.sh
 
