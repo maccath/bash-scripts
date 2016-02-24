@@ -23,7 +23,7 @@ for d in */ ; do
 
     # For each specified branch, if it exists, pull
     for b in "$@"; do
-        if [ "git branch --list ${b}" ]; then
+        if [[ $(git branch --list $b) ]]; then
            git checkout $b;
            git pull;
         fi
