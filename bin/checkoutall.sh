@@ -33,7 +33,15 @@ for d in */ ; do
                 git pull
             fi
         else
-            echo "Branch does not exist for this repository"
+            if [[ ${2} == "force" ]]; then
+                status=$(git checkout ${1} 2>&1)
+
+                if [[ "${status}" == *"did not match"* ]]; then
+                    echo "Branch does not exist for this repository"
+                fi
+            else
+                echo "Branch does not exist for this repository"
+            fi
         fi
     fi
 
