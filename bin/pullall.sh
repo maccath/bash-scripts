@@ -20,35 +20,37 @@ for d in */ ; do
     echo "${green}Switching to ${d}...${reset}"
     cd "${d}"
 
-    # Remember our place
-    original_branch=$(git rev-parse --abbrev-ref HEAD)
-    checked_out=false
+    if [ -e .git ]; then
+        # Remember our place
+        original_branch=$(git rev-parse --abbrev-ref HEAD)
+        checked_out=false
 
-    # Pull current branch
-    git pull
+        # Pull current branch
+        git pull
 
-    # For each specified branch...
-    for b in "$@"; do
-        # As long as it's not the original branch...
-        if ! [[ "${original_branch}" == "${b}" ]]; then
-            # If the branch exists...
-            if [[ $(git branch --list ${b}) ]]; then
-                # Check it out...
-                status=$(git checkout ${b})
-                checked_out=true
+        # For each specified branch...
+        for b in "$@"; do
+            # As long as it's not the original branch...
+            if ! [[ "${original_branch}" == "${b}" ]]; then
+                # If the branch exists...
+                if [[ $(git branch --list ${b}) ]]; then
+                    # Check it out...
+                    status=$(git checkout ${b})
+                    checked_out=true
 
-                # And if it's not up to date...
-                if ! [[ "${status}" == *"is up-to-date with"* ]]; then
-                    # Pull
-                    git pull
+                    # And if it's not up to date...
+                    if ! [[ "${status}" == *"is up-to-date with"* ]]; then
+                        # Pull
+                        git pull
+                    fi
                 fi
             fi
-        fi
-    done
+        done
 
-    # Go back to original branch, if we were switched from it
-    if [ "${checked_out}" == true ]; then
-        git checkout ${original_branch}
+        # Go back to original branch, if we were switched from it
+        if [ "${checked_out}" == true ]; then
+            git checkout ${original_branch}
+        fi
     fi
 
     cd ..
