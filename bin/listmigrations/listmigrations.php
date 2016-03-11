@@ -1,18 +1,24 @@
 <?php
 
+require 'feature.php';
+require 'migration.php';
+require 'logReader.php';
+require 'line.php';
+
 $db = $argv[1];
+$branch = $argv[2];
+$format = $argv[3];
+$migrationsPath = $argv[4];
+
 $input = file("php://stdin");
 
-$currentIssues = 'UNKNOWN';
+$currentIssues = false;
 
-foreach ($input as $line) {
-    $matches = [];
-    if (preg_match("/(?<=#)?[A-Z]+-[0-9]+/", $line, $matches) >= 1) {
-        $matches = array_slice($matches, 0);
-        $currentIssues = join(", ", $matches);
-    } else if (preg_match("/migrations/", $line)) {
-        echo $currentIssues . " " . preg_replace("/migrations\/" . $db . "\//", "", $line);
-    } else {
-        $currentIssues = "UNKNOWN";
-    }
-}
+$feature = new Feature($branch, $db);
+$logReader = new LogReader($migrationsPath, $feature);
+
+// Read the input
+$logReader->readLog($input);
+
+// Echo the output
+echo $logReader->listLog($format);
