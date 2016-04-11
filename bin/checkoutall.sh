@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Example usage:
-# ./checkoutall.sh [branchName]
+# ./checkoutall.sh [branchName] [force]
 
 # Parent path
 parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )

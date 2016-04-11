@@ -1,6 +1,7 @@
 #Bash Scripts
 
-A selection of simple but useful bash scripts I use, primarily at work.
+A selection of simple but potentially useful bash scripts I use, primarily at work. Items marked with a :warning: 
+require a specific set-up beyond what can be configured here, but they may be of use to you. I make no guarantees!
 
 To configure, please rename the existing `etc/sample.cfg` file to `etc/configuration.cfg` and edit it to fit your own 
 configuration.
@@ -12,17 +13,19 @@ To create aliases for the functions, edit your bash profile with something simil
     
 ## Available Scripts
 
-### checkoutall.sh
+### checkoutall.sh 
 
 Check out a given branch for all git repositories in `$project_path`
 
-    checkoutall.sh [branchName]
+To force fetch from remote, use the second parameter `force`
+
+    checkoutall.sh [branchName] [force]
     
 ### pullall.sh
 
 Pull the current branch and all given branches for all git repositories in `$project_path`
 
-    pullall.sh [branchName] [branchName] ...
+    pullall.sh [branchName branchName ...]
     
 ###  ct.sh
 
@@ -30,8 +33,14 @@ Change directory to the given project in the `$project_path` directory (partial 
 
     . ct.sh [projectName]
     
-### phinx.sh
+### :warning: phinx.sh
 
 Create a new Phinx migration in `$db_migrations_path`
 
     phinx.sh [scriptName] [migrationName]
+    
+### :warning: deploy.sh
+
+Deploy [repos] to the given [feature] on [server] using [branch] or develop branch if it doesn't exist
+
+    ./deploy.sh [feature] [server] [branch] [repos]
