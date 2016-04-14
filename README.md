@@ -21,6 +21,12 @@ To force fetch from remote, use the second parameter `force`
 
     checkoutall.sh [branchName] [force]
     
+### fetchall.sh 
+
+Fetch from remote for all repositories in `$project_path`
+
+    fetchall.sh
+    
 ### pullall.sh
 
 Pull the current branch and all given branches for all git repositories in `$project_path`
