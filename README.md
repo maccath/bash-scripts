@@ -50,3 +50,9 @@ Create a new Phinx migration in `$db_migrations_path`
 Deploy [repos] to the given [feature] on [server] using [branch] or develop branch if it doesn't exist
 
     ./deploy.sh [feature] [server] [branch] [repos]
+
+### :warning: setschema.sh
+
+Set the schemaPrefix XML attribute for the local configuration in all applications
+
+    ./setschema.sh [schemaName]
