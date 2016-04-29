@@ -28,7 +28,7 @@ cd ${project_path}
 # For each repo we want to deploy
 for project in "${@:4}"; do
     # Move to the project directory
-    cd ${project_path}/${project}*
+    cd ${project_path}/${project}.*
 
     # Check if git repo
     if [ -e .git ]; then
