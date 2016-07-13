@@ -3,7 +3,7 @@
 # Set the database schema in all environment configuration files to be prefixed with [schemaName]
 
 # Example usage:
-# ./setschema.sh [schemaName]
+# ./setschema.sh [schemaName] [backup]
 
 # Parent path
 parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
@@ -26,11 +26,17 @@ for d in */ ; do
 
     if [ -e env/local/context.xml ]; then
         # Set the schema to the given schema name
-        sed -i -e "s/<schemaPrefix>[a-zA-Z_0-9]*<\/schemaPrefix>/<schemaPrefix>${schema}<\/schemaPrefix>/g" env/local/context.xml
+        sed -i .bak -e "s/<schemaPrefix>[a-zA-Z_0-9]*<\/schemaPrefix>/<schemaPrefix>${schema}<\/schemaPrefix>/g" env/local/context.xml
+        if [ -z "$2" ]; then
+            rm env/local/context.xml.bak
+        fi
         echo "Schema updated in env/local/context.xml"
     elif [ -e .env ]; then
         # Set the schema to the given schema name
-        sed -i -e "s/DB_DATABASE=[a-zA-Z_0-9]*_castle/DB_DATABASE=${schema}_castle/g" .env
+        sed -i .bak -e "s/DB_DATABASE=[a-zA-Z_0-9]*_castle/DB_DATABASE=${schema}_castle/g" .env
+        if [ -z "$2" ]; then
+            rm .env.bak
+        fi
         echo "Schema updated in .env"
     fi
 
