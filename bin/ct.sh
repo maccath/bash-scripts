@@ -18,7 +18,7 @@ trimmed=$(echo ${1} | sed 's:/*$::')
 
 project=$(ls -d ${project_path}/${trimmed}* | head -n1)
 
-if [ "-d ${project}" ]; then
+if [ -d ${project} ]; then
     cd ${project}
 else
     echo "Project not found"
