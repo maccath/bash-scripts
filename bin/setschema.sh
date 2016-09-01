@@ -6,7 +6,11 @@
 # ./setschema.sh [schemaName] [backup]
 
 # Parent path
-parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
+if [ -z ${BASH_SOURCE} ]; then
+    parent_path=$( cd "$(dirname "${(%):-%N}")" ; pwd -P )
+else
+    parent_path=$( cd "$(dirname "${BASH_SOURCE}")" ; pwd -P )
+fi
 
 # Configuration file
 source ${parent_path}/../etc/configuration.cfg
