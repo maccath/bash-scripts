@@ -41,7 +41,7 @@ for project in "${@:4}"; do
             status=$(git checkout ${branch} 2>&1)
 
             if [[ "${status}" == *"did not match"* ]]; then
-                branch="develop"
+                branch="master"
             fi
         fi
     fi
