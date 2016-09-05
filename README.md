@@ -15,11 +15,10 @@ To create aliases for the functions, edit your bash profile with something simil
 
 ### checkoutall.sh 
 
-Check out a given branch for all git repositories in `$project_path`
+Check out a given branch for all git repositories in `$project_path`. Automatically fetches from remote. To only 
+check out locally, use second optional parameter `localOnly`.
 
-To force fetch from remote, use the second parameter `force`
-
-    checkoutall.sh [branchName] [force]
+    checkoutall.sh [branchName] [localOnly]
     
 ### fetchall.sh 
 

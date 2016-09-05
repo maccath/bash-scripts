@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Example usage:
-# ./checkoutall.sh [branchName] [force]
+# ./checkoutall.sh [branchName] [localOnly]
 
 # Parent path
 if [ -z ${BASH_SOURCE} ]; then
@@ -15,6 +15,9 @@ source ${parent_path}/../etc/configuration.cfg
 
 # Colours
 source ${parent_path}/../etc/colours.cfg
+
+# Local branches only?
+localOnly=${2}
 
 # Move to directory containing all projects
 cd ${project_path}
@@ -37,14 +40,14 @@ for d in */ ; do
                 git pull
             fi
         else
-            if [[ ${2} == "force" ]]; then
+            if [[ -z ${localOnly} ]]; then
                 status=$(git checkout ${1} 2>&1)
 
                 if [[ "${status}" == *"did not match"* ]]; then
-                    echo "Branch does not exist for this repository"
+                    echo "Remote branch does not exist for this repository"
                 fi
             else
-                echo "Branch does not exist for this repository"
+                echo "Local branch does not exist for this repository"
             fi
         fi
     fi
