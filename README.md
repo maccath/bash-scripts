@@ -33,6 +33,12 @@ Pull the current branch and all given branches for all git repositories in `$pro
 
     pullall.sh [branchName branchName ...]
     
+### delete_merged.sh
+
+List and delete Git branches for the `projectName` project (in `$project_path`) that have already been merged into `master`.
+    
+    ./delete_merged.sh [projectName]
+    
 ###  ct.sh
 
 Change directory to the given project in the `$project_path` directory (partial names accepted)
