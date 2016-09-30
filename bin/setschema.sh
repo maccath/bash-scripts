@@ -30,14 +30,14 @@ for d in */ ; do
 
     if [ -e env/local/context.xml ]; then
         # Set the schema to the given schema name
-        sed -i .bak -e "s/<schemaPrefix>[a-zA-Z_0-9]*<\/schemaPrefix>/<schemaPrefix>${schema}<\/schemaPrefix>/g" env/local/context.xml
+        sed -i .bak -e "s/<schemaPrefix>[a-zA-Z_0-9\-]*<\/schemaPrefix>/<schemaPrefix>${schema}<\/schemaPrefix>/g" env/local/context.xml
         if [ -z "$2" ]; then
             rm env/local/context.xml.bak
         fi
         echo "Schema updated in env/local/context.xml"
     elif [ -e .env ]; then
         # Set the schema to the given schema name
-        sed -i .bak -e "s/DB_DATABASE=[a-zA-Z_0-9]*_castle/DB_DATABASE=${schema}_castle/g" .env
+        sed -i .bak -e "s/DB_DATABASE=[a-zA-Z_0-9\-]*_castle/DB_DATABASE=${schema}_castle/g" .env
         if [ -z "$2" ]; then
             rm .env.bak
         fi
